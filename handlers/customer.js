@@ -309,8 +309,8 @@ customer.subscribe = function(request, reply) {
           return start;
         })
         .then(function(newUserData) {
-          var setSession = P.promisify(request.server.methods.user.setSession(request), {context: null});
-          var delSession = P.promisify(request.server.methods.user.delSession(request), {context: null});
+          var setSession = P.promisify(request.server.methods.user.setSession(request));
+          var delSession = P.promisify(request.server.methods.user.delSession(request));
           loggedInUser = newUserData ? newUser : loggedInUser;
 
           if (newUserData) {
