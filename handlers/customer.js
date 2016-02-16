@@ -201,13 +201,14 @@ customer.subscribe = function(request, reply) {
         });
       } else {
         notices = err.details.map(function(e) {
-          return P.reject(e.message);
+          return P.reject(e);
         });
 
         return request.saveNotifications(notices).then(function(token) {
           return reply.redirect('/settings/billing' + (token ? '?notice=' + token : ''));
         }).catch(function(err) {
           request.logger.error(err);
+          return reply.view('errors/internal', err).code(500)
         });
       }
 
@@ -258,7 +259,7 @@ customer.subscribe = function(request, reply) {
         var err = new Error("User name must be valid");
         request.logger.error(err);
         return request.saveNotifications([
-          P.reject(err.message)
+          P.reject(err),
         ]).then(function(token) {
           var url = '/org/transfer-user-name';
           var param = token ? "?notice=" + token : "";
@@ -336,7 +337,8 @@ customer.subscribe = function(request, reply) {
           if (typeof subscription === 'string') {
             request.logger.info("created subscription: ", planInfo);
           }
-          var dropCache = P.promisify(User(request.loggedInUser).dropCache);
+          var user = User(request.loggedInUser);
+          var dropCache = P.promisify(user.dropCache, {context: user});
           return dropCache(loggedInUser);
         })
         .then(function(subscription) {
@@ -451,7 +453,7 @@ customer.subscribe = function(request, reply) {
           if (err.statusCode < 500) {
             request.logger.error(err);
             return request.saveNotifications([
-              P.reject(err.message)
+              P.reject(err),
             ]).then(function(token) {
               var url = '/org/create';
               var param = token ? "?notice=" + token : "";
