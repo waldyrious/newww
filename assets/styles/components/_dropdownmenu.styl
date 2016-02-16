@@ -6,12 +6,13 @@
   border-radius 5px
   z-index 99999
   padding 1em 15px
-  right 0
+  right -10px
+  top 2.5em
 
   &:before
     position absolute
     top -11px
-    right 18px
+    right 7px
     content '\0020'
     border-left 2px solid #808080
     border-top 2px solid #808080
@@ -28,20 +29,23 @@
 .drop-down-menu-container
   position relative
   display inline-block
+  vertical-align 50%
 
 .drop-down-menu-section
+  padding-bottom 0.5em
   border-bottom 1px solid gray
 
   &:last-child
     border-bottom 0
+    padding-bottom 0
 
   ul, li
     list-style none
+    text-align left
     margin 0
 
   .btn-link
     padding 0
-
 
 .drop-down-menu-overlay
   display none
@@ -55,4 +59,16 @@
 
 .drop-down-menu-toggle
   position relative
+  display inline-block
   z-index 99999
+  vertical-align top
+  color greigh3
+  text-decoration none
+  padding-left 5px
+
+  &:before
+    content '\0025BC'
+    font-size 2em
+
+  &:hover
+    text-decoration none

@@ -81,20 +81,40 @@
 
       <div id="user-info" class={{#if user}}"logged-in"{{else}}"anonymous"{{/if}}>
         {{#if user}}
+          <ul class="user-info-salutation">
+            <li>Greetings,</li>
+            <li class="username"><a href="/~{{user.name}}">{{user.name}}</a></li>
+          </ul>
           <a data-user-name="{{user.name}}"
               data-is-paid="{{#if user.isPaid}}true{{/if}}"
               href="/~{{user.name}}">
-              <img alt="" src="{{user.avatar.small}}" />
+            <img alt="" src="{{user.avatar.small}}" />
           </a>
-          <ul>
-              <li class="username"><a href="/~{{user.name}}">{{user.name}}</a></li>
-              <li class="logout"><form method="POST" action="/logout">{{> form_security }}<button type="submit" class="subdued">log out</button></form></li>
-          </ul>
+          <div class="drop-down-menu-container">
+            <a class="drop-down-menu-toggle" href="#drop-down-menu"></a>
+            <div id="drop-down-menu" class="drop-down-menu">
+              <div class="drop-down-menu-section">
+                <ul>
+                  <li><a href="/profile-edit">personal info</a></li>
+                  <li><a href="/subscriptions">subscriptions</a></li>
+                  <li><a href="/settings/billing">billing</a></li>
+                  <li><a href="/settings/tokens">tokens</a></li>
+                </ul>
+              </div>
+
+              <div class="drop-down-menu-section">
+                <ul>
+                  <li><form method="POST" action="/logout">{{> form_security }}<button type="submit" class="btn-link">logout</button></form></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="drop-down-menu-overlay" data-drop-down-menu="drop-down-menu"></div>
         {{else}}
-          <a href="/login"><img alt="" src="/static/images/wombat-avatar-small.png" /></a>
-          <ul class="single">
-              <li><a href="/signup">sign up</a> or <a href="/login">log in</a></li>
+          <ul class="user-info-salutation single">
+            <li><a href="/signup">sign up</a> or <a href="/login">log in</a></li>
           </ul>
+          <a href="/login"><img alt="" src="/static/images/wombat-avatar-small.png" /></a>
 
         {{/if}}
       </div>

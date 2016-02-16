@@ -308,22 +308,24 @@ body>nav
 #user-info
   order 3
   img
-    float right
-    display block
+    display inline-block
     width avatarSizeNav
     margin 0 0 0 10px
     border-radius 2px
+    vertical-align bottom
 
-  ul
+  ul.user-info-salutation
     @extend .vanilla-list
-    float right
-    display block
+    display inline-block
     text-align right
-    margin-top 8px
+    padding-bottom 0.5em
+    vertical-align bottom
+
     li
       line-height 1
     &.single
       margin-top 0
+      padding-bottom 0
       li
         line-height avatarSizeNav
         vertical-align top
@@ -341,8 +343,7 @@ body>nav
       img
         display none
 
-  a,
-  button[type=submit]
+  a
     &.subdued
       color greigh4
       font-size 14px
@@ -369,4 +370,4 @@ body>nav
       outline none
 
       &:hover
-        text-decoration underline !important
+        text-decoration none
